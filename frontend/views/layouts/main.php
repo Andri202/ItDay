@@ -1,3 +1,8 @@
+<style type="text/css">
+    .my-navbar {
+      background: url(img/header-bg.png);
+    }
+</style>
 <?php
 
 /* @var $this \yii\web\View */

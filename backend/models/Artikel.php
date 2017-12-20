@@ -63,4 +63,9 @@ class Artikel extends \yii\db\ActiveRecord
                               <source src="../../file/video'.$this->video.'" type="video/mp4">
                 </video>' ;
     }
+
+    public function getJudul()
+    {
+        return $this->judul;
+    }
 }

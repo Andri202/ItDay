@@ -24,8 +24,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'judul',
-            'artikel',
+             [
+               'attribute' => 'id',
+               'label'  => 'Judul',
+               'format' => 'raw',
+               'value'  => function($data) {
+                    return Html::a($data->getJudul(), ['/artikel/view', 'id' => $data->id]);
+               }
+            ],
             [
                 'attribute' => 'poster',
                 'format' => 'raw',

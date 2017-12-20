@@ -49,8 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $data->getVideo();
                     }else {
                         return 'no video';
-                    }
-                    
+                    }  
               }
             ],
         ],

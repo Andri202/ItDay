@@ -5,17 +5,44 @@
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
+        <div class="jumbotron">
+             <h1>Our Projects and Libraries Of ITDAY</h1>
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+            <p class="lead">Here is a small list of our community projects.</p>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        </div>
+        <?php $items = [
+    [
+        'title' => 'Sintel',
+        'href' => '../../file/video/BELAJAR_IQRA.mp4',
+        'type' => 'video/mp4',
+        'poster' => 'http://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Elephants_Dream_s1_proog.jpg/' .
+            '800px-Elephants_Dream_s1_proog.jpg'
+    ],
+    [
+        'title' => 'Sintel',
+        'href' => '../../file/video/final WeGO a_1494554955912.mp4',
+        'type' => 'video/mp4',
+        'poster' => 'http://media.w3.org/2010/05/sintel/poster.png'
+    ],
+    [
+        'title' => 'Sintel',
+        'href' => '../../file/video/PanicDroid.mp4',
+        'type' => 'video/mp4',
+        'poster' => 'http://media.w3.org/2010/05/sintel/poster.png'
+    ],
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
+    ];?>
+        <?= dosamigos\gallery\Carousel::widget([
+            'items' => $items, 'json' => true,
+            'clientEvents' => [
+                'onslide' => 'function(index, slide) {
+                    console.log(slide);
+                }'
+        ]]);?>
+
 
     <div class="body-content">
-
         <div class="row">
             <div class="col-lg-4">
                 <h2>Heading</h2>

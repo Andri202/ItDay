@@ -54,7 +54,7 @@ class Artikel extends \yii\db\ActiveRecord
 
     public function getPoster($htmlOptions=[])
     {
-        return Html::img('../../file/img'.$this->poster,$htmlOptions);
+        return Html::img('../../file/img'.$this->poster, ['width' => '350','align'=>'right']);
     }
     
     public function getVideo()
