@@ -75,7 +75,7 @@ class ArtikelController extends Controller
                 $model->poster .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
                 $model->poster .='.'.$img->extension;
 
-                $path = '../../file/img'.$model->poster; //represent file paths or URLs // @app: Your application root directory
+                $path = '../../file/'.$model->poster; //represent file paths or URLs // @app: Your application root directory
                 $img->saveAs($path, false);
             }
             $video = UploadedFile::getInstance($model, 'video');
@@ -85,7 +85,7 @@ class ArtikelController extends Controller
                 $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
                 $model->video .='.'.$video->extension;
 
-                $path = '../../file/video'.$model->video; //represent file paths or URLs // @app: Your application root directory
+                $path = '../../file/'.$model->video; //represent file paths or URLs // @app: Your application root directory
                 $video->saveAs($path, false);
             }  
 
@@ -117,9 +117,10 @@ class ArtikelController extends Controller
                 $model->poster .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
                 $model->poster .='.'.$img->extension;
 
-                $path = '../../file/img'.$model->poster; //represent file paths or URLs // @app: Your application root directory
+                $path = '../../file/'.$model->poster; //represent file paths or URLs // @app: Your application root directory
                 $img->saveAs($path, false);
             }
+            
             $video = UploadedFile::getInstance($model, 'video');
             if(is_object($video))
             {
@@ -127,7 +128,7 @@ class ArtikelController extends Controller
                 $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
                 $model->video .='.'.$video->extension;
 
-                $path = '../../file/video'.$model->video; //represent file paths or URLs // @app: Your application root directory
+                $path = '../../file/'.$model->video; //represent file paths or URLs // @app: Your application root directory
                 $video->saveAs($path, false);
             }  
 
