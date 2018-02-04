@@ -13,7 +13,7 @@ use yii\web\UploadedFile;
 /**
  * ArtikelController implements the CRUD actions for Artikel model.
  */
-class ArtikelController extends Controller
+class ArtikelController extends Controller 
 {
     /**
      * @inheritdoc
@@ -81,7 +81,7 @@ class ArtikelController extends Controller
                 $model->folder = $structure;
             }
 
-            $img = UploadedFile::getInstance($model, 'img_upload');
+            $img = UploadedFile::getInstance($model, 'poster');
             if (!empty($img)) {
                 if(is_object($img))
                 {
@@ -95,7 +95,7 @@ class ArtikelController extends Controller
                 }
             }
                 
-            $video = UploadedFile::getInstance($model, 'video_upload');
+            $video = UploadedFile::getInstance($model, 'video');
             if (!empty($video)) {
                 if(is_object($video))
                 {
@@ -122,8 +122,13 @@ class ArtikelController extends Controller
      * @param integer $id
      * @return mixed
      */
+
     public function actionUpdate($id)
     {
+        $query = Artikel::find()
+            ->andWhere(['id' => $id])
+            ->one();
+
         $model = $this->findModel($id);
 
 
@@ -131,37 +136,48 @@ class ArtikelController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $dir = $model->folder;
+            $file = $model->getPosterName();
+            $dir = $model->folder;
 
-            foreach (glob($dir."/*.*") as $filename) {
-                if (is_file($filename)) {
-                    unlink($filename);
-                }
+            $img = UploadedFile::getInstance($model, 'poster');
+
+            if (!empty($query->poster)) {
+                $model->poster = $query->poster;
             }
-
-            $img = UploadedFile::getInstance($model, 'img_upload');
-            if (!empty($img)) {
-                if(is_object($img))
-                {
-                    
-                    $model->poster = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
-                    
-                    $model->poster .='.'.$img->extension;
-
-                    $path = $structure."/".$model->poster; //represent file paths or URLs // @app: Your application root directory
-                    $img->saveAs($path, false);
-                }
-            }
+            
+            if(is_object($img))
+            {   
+                $file = $query->folder.'/'.$query->poster;
+                if(!empty($query->poster)){
+                    chown($file,0777);
+                    unlink($file);
+                 }
+                $model->poster = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
                 
-            $video = UploadedFile::getInstance($model, 'video_upload');
-            if (!empty($video)) {
-                if(is_object($video))
-                {
-                    $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
-                    $model->video .='.'.$video->extension;
+                $model->poster .='.'.$img->extension;
 
-                    $path = $structure."/".$model->video;
-                    $video->saveAs($path, false);
-                } 
+                $path = $dir."/".$model->poster; //represent file paths or URLs // @app: Your application root directory
+                $img->saveAs($path, false);
+            }
+   
+                   
+            $video = UploadedFile::getInstance($model, 'video');
+            if (!empty($query->video)) {
+                $model->video = $query->video;
+            }
+            if(is_object($video))
+            {
+                $file = $query->folder.'/'.$query->video;
+                 if(!empty($query->video)){
+                            chmod($file,0777);
+                            unlink($file);
+                    }
+
+                $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+                $model->video .='.'.$video->extension;
+
+                $path = $dir."/".$model->video;
+                $video->saveAs($path, false);
             } 
 
             $model->save();
@@ -179,8 +195,6 @@ class ArtikelController extends Controller
      * @param integer $id
      * @return mixed
      */
-
-
 
     public function actionDelete($id)
     {

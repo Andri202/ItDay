@@ -30,11 +30,11 @@ class Artikel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['judul', 'artikel', 'img_upload', 'video_upload'], 'required'],
+            [['judul', 'artikel',], 'required'],
             [['judul'], 'string', 'max' => 255],
             [['folder'], 'string', 'max' => 255],
             [['artikel'], 'string', 'max' => 1024],
-            [['image'], 'file', 'extensions'=>'jpg, gif, png'],
+            [['poster'], 'file', 'extensions'=>'jpg, gif, png'],
             [['video'], 'file'],
         ];
     }
@@ -69,5 +69,28 @@ class Artikel extends \yii\db\ActiveRecord
     public function getJudul()
     {
         return $this->judul;
+    }
+
+    Public function getPosterName() //sama aja
+    {
+        $model = Artikel::find()
+            ->andWhere(['id' => $this->id])
+            ->one();
+
+        if ($model !== null) {
+            return $model->poster;;
+        }
+
+    }
+
+    Public function getVideoName() //sama aja
+    {
+        $model = Artikel::find()
+            ->andWhere(['id' => $this->id])
+            ->one();
+
+        if ($model !== null) {
+            return $model->video;;
+        }
     }
 }

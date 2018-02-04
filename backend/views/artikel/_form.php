@@ -21,12 +21,12 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'judul')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'img_upload')->widget(FileInput::classname(), [
+    <?= $form->field($model, 'poster')->widget(FileInput::classname(), [
               'options' => ['accept' => 'image/*'],
                'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],'showUpload' => false,],
           ]);   ?>
 
-    <?= $form->field($model, 'video_upload')->fileinput() ?>
+    <?= $form->field($model, 'video')->fileinput() ?>
 
     <?= $form->field($model, 'artikel')->widget(TinyMce::className(), [
     'options' => ['rows' => 15],
