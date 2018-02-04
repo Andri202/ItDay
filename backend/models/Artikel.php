@@ -30,10 +30,11 @@ class Artikel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['judul', 'artikel'], 'required'],
+            [['judul', 'artikel', 'img_upload', 'video_upload'], 'required'],
             [['judul'], 'string', 'max' => 255],
+            [['folder'], 'string', 'max' => 255],
             [['artikel'], 'string', 'max' => 1024],
-            [['poster'], 'safe'],
+            [['image'], 'file', 'extensions'=>'jpg, gif, png'],
             [['video'], 'file'],
         ];
     }
@@ -49,18 +50,19 @@ class Artikel extends \yii\db\ActiveRecord
             'artikel' => 'Artikel',
             'poster' => 'Poster',
             'video' => 'Video',
+            'folder' => 'Folder',
         ];
     }
 
     public function getPoster($htmlOptions=[])
     {
-        return Html::img('../../file/img'.$this->poster,$htmlOptions);
+        return Html::img($this->folder."/".$this->poster,$htmlOptions);
     }
     
     public function getVideo()
     {
         return '<video width="320" height="240" controls>
-                              <source src="../../file/video'.$this->video.'" type="video/mp4">
+                              <source src="'.$this->folder."/".$this->video.'" type="video/mp4">
                 </video>' ;
     }
 

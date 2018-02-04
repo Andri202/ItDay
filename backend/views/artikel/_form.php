@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\tinymce\TinyMce;
+use kartik\file\FileInput;
 
 
 /* @var $this yii\web\View */
@@ -12,13 +13,20 @@ use dosamigos\tinymce\TinyMce;
 
 <div class="artikel-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();  ?>
+
+
+
+    <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
 
     <?= $form->field($model, 'judul')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'poster')->fileinput() ?>
+    <?= $form->field($model, 'img_upload')->widget(FileInput::classname(), [
+              'options' => ['accept' => 'image/*'],
+               'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],'showUpload' => false,],
+          ]);   ?>
 
-    <?= $form->field($model, 'video')->fileinput() ?>
+    <?= $form->field($model, 'video_upload')->fileinput() ?>
 
     <?= $form->field($model, 'artikel')->widget(TinyMce::className(), [
     'options' => ['rows' => 15],

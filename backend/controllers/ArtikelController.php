@@ -67,27 +67,45 @@ class ArtikelController extends Controller
         $model = new Artikel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $img = UploadedFile::getInstance($model, 'poster');
+            
 
-            if(is_object($img))
-            {
-                $model->poster = $img->basename; //Returns trailing name component of path
-                $model->poster .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
-                $model->poster .='.'.$img->extension;
+            $name = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+            $structure = '../../file/'.$name;
 
-                $path = '../../file/'.$model->poster; //represent file paths or URLs // @app: Your application root directory
-                $img->saveAs($path, false);
+            // To create the nested structure, the $recursive parameter 
+            // to mkdir() must be specified.
+
+            if (!mkdir($structure, 0777, true)) {
+                die('Failed to create folders...');
+            }else{
+                $model->folder = $structure;
             }
-            $video = UploadedFile::getInstance($model, 'video');
-            if(is_object($video))
-            {
-                $model->video = $video->basename; //Returns trailing name component of path
-                $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
-                $model->video .='.'.$video->extension;
 
-                $path = '../../file/'.$model->video; //represent file paths or URLs // @app: Your application root directory
-                $video->saveAs($path, false);
-            }  
+            $img = UploadedFile::getInstance($model, 'img_upload');
+            if (!empty($img)) {
+                if(is_object($img))
+                {
+                    
+                    $model->poster = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
+                    
+                    $model->poster .='.'.$img->extension;
+
+                    $path = $structure."/".$model->poster; //represent file paths or URLs // @app: Your application root directory
+                    $img->saveAs($path, false);
+                }
+            }
+                
+            $video = UploadedFile::getInstance($model, 'video_upload');
+            if (!empty($video)) {
+                if(is_object($video))
+                {
+                    $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+                    $model->video .='.'.$video->extension;
+
+                    $path = $structure."/".$model->video;
+                    $video->saveAs($path, false);
+                } 
+            }
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
@@ -108,29 +126,43 @@ class ArtikelController extends Controller
     {
         $model = $this->findModel($id);
 
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $img = UploadedFile::getInstance($model, 'poster');
 
-            if(is_object($img))
-            {
-                $model->poster = $img->basename; //Returns trailing name component of path
-                $model->poster .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
-                $model->poster .='.'.$img->extension;
+            $dir = $model->folder;
 
-                $path = '../../file/'.$model->poster; //represent file paths or URLs // @app: Your application root directory
-                $img->saveAs($path, false);
+            foreach (glob($dir."/*.*") as $filename) {
+                if (is_file($filename)) {
+                    unlink($filename);
+                }
             }
-            
-            $video = UploadedFile::getInstance($model, 'video');
-            if(is_object($video))
-            {
-                $model->video = $video->basename; //Returns trailing name component of path
-                $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
-                $model->video .='.'.$video->extension;
 
-                $path = '../../file/'.$model->video; //represent file paths or URLs // @app: Your application root directory
-                $video->saveAs($path, false);
-            }  
+            $img = UploadedFile::getInstance($model, 'img_upload');
+            if (!empty($img)) {
+                if(is_object($img))
+                {
+                    
+                    $model->poster = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));//Formats a date, time or datetime in a float number as UNIX timestamp (seconds since 01-01-1970).
+                    
+                    $model->poster .='.'.$img->extension;
+
+                    $path = $structure."/".$model->poster; //represent file paths or URLs // @app: Your application root directory
+                    $img->saveAs($path, false);
+                }
+            }
+                
+            $video = UploadedFile::getInstance($model, 'video_upload');
+            if (!empty($video)) {
+                if(is_object($video))
+                {
+                    $model->video .= Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
+                    $model->video .='.'.$video->extension;
+
+                    $path = $structure."/".$model->video;
+                    $video->saveAs($path, false);
+                } 
+            } 
 
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
@@ -147,8 +179,22 @@ class ArtikelController extends Controller
      * @param integer $id
      * @return mixed
      */
+
+
+
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);
+
+        $dir = $model->folder;
+
+        foreach (glob($dir."/*.*") as $filename) {
+            if (is_file($filename)) {
+                unlink($filename);
+            }
+        }
+        rmdir($dir);
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value'=> function($data){
                     if ($data->poster!=''){
-                    return $data->getPoster(['width'=>'80px']);
+                        return $data->getPoster(['height'=>'100px']);
                     }else {
                         return 'no image';
                     }
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'video',
                 'format' => 'raw',  // or html
                 'value' => function  ($data)  {
-                    if ($data->video!=''){
+                    if ($data->video!= null){
                         return $data->getVideo();
                     }else {
                         return 'no video';
