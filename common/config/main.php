@@ -1,5 +1,7 @@
 <?php
 return [
+    'id' => 'imos',
+    'name' => 'IMOS',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -9,5 +11,6 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+
     ],
 ];

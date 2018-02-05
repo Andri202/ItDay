@@ -16,6 +16,7 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -47,5 +48,6 @@ return [
         ],
         */
     ],
+    
     'params' => $params,
 ];

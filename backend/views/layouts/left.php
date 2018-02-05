@@ -33,6 +33,7 @@
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Home', 'icon' => ' fa-home', 'url' => ['/site/index']],
                     ['label' => 'Artikel', 'icon' => ' fa-book', 'url' => ['/artikel/index']],
+                    ['label' => 'Aplikasi ItDay', 'icon' => ' fa-book', 'url' => ['/aplikasi-itday/index']],
                     ['label' => 'About', 'icon' => 'user', 'url' => ['/site/about']],
                     ['label' => 'Contact', 'icon' => 'phone', 'url' => ['/site/contact']],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
