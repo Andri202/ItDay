@@ -8,10 +8,10 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Artikel';
-// $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="artikel-index box box-primary">
-    <div class="box-header">
+<div class="artikel-index box box-success">
+    <div class="box-header with-border">
         <h1><?= Html::encode($this->title) ?></h1>
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
     </div>

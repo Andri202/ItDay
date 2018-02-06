@@ -35,7 +35,7 @@ class Artikel extends \yii\db\ActiveRecord
             [['folder'], 'string', 'max' => 255],
             [['artikel'], 'string', 'max' => 1024],
             [['poster'], 'file', 'extensions'=>'jpg, gif, png'],
-            [['video'], 'file'],
+            [['video'], 'file', 'extensions' => 'mp4'],
         ];
     }
 
