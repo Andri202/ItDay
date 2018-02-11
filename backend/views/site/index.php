@@ -5,17 +5,19 @@
 $this->title = 'My Yii Application';
 $hh = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
 ?>
-<div class="site-index">
+<div class="site-index box box-success">
+    
+    <div class="box-header with-border">
+        <div class="jumbotron">
+            <h1>Congratulations!</h1>
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+            <p class="lead">You have successfully created your Yii-powered application.<?= $hh ?></p>
 
-        <p class="lead">You have successfully created your Yii-powered application.<?= $hh ?></p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+            <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        </div>
     </div>
 
-    <div class="body-content">
+    <div class="box-body">
 
         <div class="row">
             <div class="col-lg-4">

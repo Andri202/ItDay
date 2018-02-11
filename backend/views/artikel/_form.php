@@ -11,20 +11,22 @@ use kartik\file\FileInput;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="artikel-form box box-success">
-    <div class="box-header with-border">
-        <?php $form = ActiveForm::begin();  ?>
-    </div>
+<div class="artikel-index box box-success">
     
+    
+        <?php $form = ActiveForm::begin([
+          'options'=>['enctype'=>'multipart/form-data']]); // important         
+           ?>
+
     <div class="box-body">
         <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
 
         <?= $form->field($model, 'judul')->textInput(['maxlength' => true]) ?>
 
         <?= $form->field($model, 'poster')->widget(FileInput::classname(), [
-                  'options' => ['accept' => 'image/*'],
-                   'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],'showUpload' => false,],
-              ]);   ?>
+              'options' => ['accept' => 'image/*'],
+               'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png'],'showUpload' => false,],
+          ]);   ?>
 
         <?= $form->field($model, 'video')->widget(FileInput::classname(), [
                   'options' => ['accept' => 'video/*'],
@@ -43,11 +45,11 @@ use kartik\file\FileInput;
             'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
         	]
     	]);?>
-
-        <div class="box-footer">
+    </div>
+    <div class="box-footer with-border">
             <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        </div>
 
         <?php ActiveForm::end(); ?>
     </div>
+
 </div>

@@ -67,8 +67,6 @@ class ArtikelController extends Controller
         $model = new Artikel();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-
             $name = Yii::$app->formatter->asTimestamp(date('Y-d-m h:i:s'));
             $structure = '../../file/'.$name;
 
@@ -130,8 +128,6 @@ class ArtikelController extends Controller
             ->one();
 
         $model = $this->findModel($id);
-
-
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 

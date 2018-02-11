@@ -30,11 +30,13 @@ class Artikel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['judul', 'artikel',], 'required'],
+            [['judul', 'artikel'], 'required'],
             [['judul'], 'string', 'max' => 255],
             [['folder'], 'string', 'max' => 255],
             [['artikel'], 'string', 'max' => 1024],
+            [['poster'], 'safe'],
             [['poster'], 'file', 'extensions'=>'jpg, gif, png'],
+            [['video'], 'safe'],
             [['video'], 'file', 'extensions' => 'mp4'],
         ];
     }

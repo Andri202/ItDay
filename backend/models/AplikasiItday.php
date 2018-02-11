@@ -31,10 +31,10 @@ class AplikasiItday extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['deskripsi', 'aplikasi', 'poster', 'video', 'folder'], 'required'],
             [['deskripsi'], 'string'],
-            [['aplikasi', 'folder'], 'required'],
             [['judul', 'aplikasi'], 'string', 'max' => 255],
-            [['poster', 'video'], 'string', 'max' => 25],
+            [['poster', 'video'], 'string', 'max' => 75],
             [['folder'], 'string', 'max' => 50],
         ];
     }
