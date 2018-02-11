@@ -50,7 +50,7 @@ class Artikel extends \yii\db\ActiveRecord
             'id' => 'ID',
             'judul' => 'Judul',
             'artikel' => 'Artikel',
-            'poster' => 'Poster',
+            'poster' => 'Gambar',
             'video' => 'Video',
             'folder' => 'Folder',
         ];

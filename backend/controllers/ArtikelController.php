@@ -123,6 +123,7 @@ class ArtikelController extends Controller
 
     public function actionUpdate($id)
     {
+
         $query = Artikel::find()
             ->andWhere(['id' => $id])
             ->one();
@@ -131,7 +132,6 @@ class ArtikelController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            $dir = $model->folder;
             $file = $model->getPosterName();
             $dir = $model->folder;
 
@@ -155,8 +155,7 @@ class ArtikelController extends Controller
                 $path = $dir."/".$model->poster; //represent file paths or URLs // @app: Your application root directory
                 $img->saveAs($path, false);
             }
-   
-                   
+     
             $video = UploadedFile::getInstance($model, 'video');
             if (!empty($query->video)) {
                 $model->video = $query->video;

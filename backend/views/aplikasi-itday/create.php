@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\AplikasiItday */
 
-$this->title = 'Create Aplikasi Itday';
+$this->title = 'Tambah Aplikasi Itday';
 $this->params['breadcrumbs'][] = ['label' => 'Aplikasi Itdays', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

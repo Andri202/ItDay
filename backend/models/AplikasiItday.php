@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "aplikasi_itday".
@@ -31,10 +32,13 @@ class AplikasiItday extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['deskripsi', 'aplikasi', 'poster', 'video', 'folder'], 'required'],
+            [['judul', 'aplikasi'], 'required'],
             [['deskripsi'], 'string'],
             [['judul', 'aplikasi'], 'string', 'max' => 255],
-            [['poster', 'video'], 'string', 'max' => 75],
+            [['poster'], 'safe'],
+            [['poster'], 'file', 'extensions'=>'jpg, gif, png'],
+            [['video'], 'safe'],
+            [['video'], 'file', 'extensions' => 'mp4'],
             [['folder'], 'string', 'max' => 50],
         ];
     }
@@ -48,10 +52,50 @@ class AplikasiItday extends \yii\db\ActiveRecord
             'id' => 'ID',
             'judul' => 'Judul',
             'deskripsi' => 'Deskripsi',
-            'aplikasi' => 'Aplikasi',
+            'aplikasi' => 'Link Aplikasi',
             'poster' => 'Poster',
             'video' => 'Video',
             'folder' => 'Folder',
         ];
+    }
+
+    public function getJudul()
+    {
+        return $this->judul;
+    }
+
+    Public function getPosterName() //sama aja
+    {
+        $model = AplikasiItday::find()
+            ->andWhere(['id' => $this->id])
+            ->one();
+
+        if ($model !== null) {
+            return $model->poster;;
+        }
+
+    }
+
+    Public function getVideoName() //sama aja
+    {
+        $model = AplikasiItday::find()
+            ->andWhere(['id' => $this->id])
+            ->one();
+
+        if ($model !== null) {
+            return $model->video;;
+        }
+    }
+
+    public function getPoster($htmlOptions=[])
+    {
+        return Html::img($this->folder."/".$this->poster,$htmlOptions);
+    }
+    
+    public function getVideo()
+    {
+        return '<video width="320" height="240" controls>
+                              <source src="'.$this->folder."/".$this->video.'" type="video/mp4">
+                </video>' ;
     }
 }

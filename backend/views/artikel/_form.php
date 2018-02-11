@@ -11,8 +11,7 @@ use kartik\file\FileInput;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="artikel-index box box-success">
-    
+<div class="artikel-form box box-success">
     
         <?php $form = ActiveForm::begin([
           'options'=>['enctype'=>'multipart/form-data']]); // important         
@@ -47,7 +46,7 @@ use kartik\file\FileInput;
     	]);?>
     </div>
     <div class="box-footer with-border">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? 'Tambah' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 
         <?php ActiveForm::end(); ?>
     </div>

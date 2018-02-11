@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="box-body">
         <p>
-            <?= Html::a('Create Artikel', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Tambah Data', ['create'], ['class' => 'btn btn-success']) ?>
         </p>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
