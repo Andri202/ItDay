@@ -11,19 +11,36 @@ class AppAsset extends AssetBundle
 {
     //public $basePath = '@webroot';
     //public $baseUrl = '@web';
-    public $sourcePath = '@bower/debut/';
+    public $sourcePath = '@bower/bizpage-master/';
     public $css = [
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
-        'scss/main.css',
-        'scss/skin.css',
+        'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700',
+        'lib/bootstrap/css/bootstrap.min.css',
+        'lib/font-awesome/css/font-awesome.min.css',
+        'lib/animate/animate.min.css',
+        'lib/ionicons/css/ionicons.min.css',
+        'lib/owlcarousel/assets/owl.carousel.min.css',
+        'lib/lightbox/css/lightbox.min.css',
+        'css/style.css',
     ];
     public $js = [
-        'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js',
-        'http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js',
-        './script/index.js',
+        'lib/jquery/jquery.min.js',
+        'lib/jquery/jquery-migrate.min.js',
+        'lib/bootstrap/js/bootstrap.bundle.min.js',
+        'lib/easing/easing.min.js',
+        'lib/superfish/hoverIntent.js',
+        'lib/superfish/superfish.min.js',
+        'lib/wow/wow.min.js',
+        'lib/waypoints/waypoints.min.js',
+        'lib/counterup/counterup.min.js',
+        'lib/owlcarousel/owl.carousel.min.js',
+        'lib/isotope/isotope.pkgd.min.js',
+        'lib/lightbox/js/lightbox.min.js',
+        'lib/touchSwipe/jquery.touchSwipe.min.js',
+        'contactform/contactform.js',
+        'js/main.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        // 'yii\bootstrap\BootstrapAsset',
     ];
 }

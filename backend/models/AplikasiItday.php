@@ -98,4 +98,19 @@ class AplikasiItday extends \yii\db\ActiveRecord
                               <source src="'.$this->folder."/".$this->video.'" type="video/mp4">
                 </video>' ;
     }
+
+        public function getNamaJenis() //sama aja
+    {
+        $model = AplikasiItday::find()
+            ->andWhere(['id' => $this->ids])
+            ->one();
+
+        if ($model !== null) {
+            return $model->nama;
+        } else {
+            return null;
+        }
+
+
+    }
 }
